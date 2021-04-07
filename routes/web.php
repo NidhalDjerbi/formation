@@ -26,4 +26,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', function () {
         return view('pages.home');
     });
+
+
+    Route::get('user', ['as' => 'user.index', 'uses' => 'UserController@index', 'middleware' => ['admin']]);
+    Route::get('user/create', ['as' => 'user.create', 'uses' => 'UserController@create', 'middleware' => ['admin']]);
+    Route::post('user/create', ['as' => 'user.store', 'uses' => 'UserController@store', 'middleware' => ['admin']]);
+    Route::get('user/show/{id}', ['as' => 'user.show', 'uses' => 'UserController@show']);
+    Route::get('user/edit/{id}', ['as' => 'user.edit', 'uses' => 'UserController@edit']);
+    Route::put('user_update/{id}', ['as' => 'user.update', 'uses' => 'UserController@update',]);
+    Route::delete('user_delete/{id}', ['as' => 'user.destroy', 'uses' => 'UserController@destroy', 'middleware' => ['admin']]);
 });

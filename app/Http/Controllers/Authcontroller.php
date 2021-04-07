@@ -41,6 +41,7 @@ class Authcontroller extends Controller
             [
                 'login' => 'required|string|unique:users',
                 'nom' => 'required|string',
+                'prenom' => 'required|string',
                 'mdp' => ['required', 'string', 'min:8'],
 
             ]
@@ -48,8 +49,9 @@ class Authcontroller extends Controller
         $user = new User;
         $user->login = $request->input('login');
         $user->nom = $request->input('nom');
+        $user->prenom = $request->input('prenom');
         $user->mdp = Hash::make($request->input('mdp'));
-        $user->type = 'user';
+        $user->type = $request->input('type');
         $user->save();
         $this->guard()->login($user);
         return redirect('/home');
