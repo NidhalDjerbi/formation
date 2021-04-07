@@ -8,4 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class Cour extends Model
 {
     use HasFactory;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'intitule'
+    ];
+
+
+    /**
+     * Get the user that owns the comment.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -17,9 +17,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'nom',
+        'prenom',
+        'login',
+        'mdp',
+        'type',
     ];
 
     /**
@@ -28,7 +30,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password',
+        'mdp',
         'remember_token',
     ];
 
@@ -40,4 +42,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getAuthPassword() {
+        return $this->mdp;
+    }
+
+
+    /**
+     * Get the formations for the blog post.
+     */
+    public function formations()
+    {
+        return $this->hasMany(Formation::class);
+    }
 }
