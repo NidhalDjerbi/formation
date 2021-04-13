@@ -5,7 +5,7 @@
             <div class="card-header">{{ __('Register') }}</div>
 
             <div class="card-body">
-                <form method="POST" action="{{ url('register_user') }}">
+                <form method="POST" action="{{ url('register_etudiant') }}">
                     @csrf
                     <div class="input-group mb-3">
                         <input placeholder="Votre nom" id="nom" type="text"
@@ -32,6 +32,30 @@
                             </div>
                         </div>
                         @error('prenom')
+                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                        @enderror
+                    </div>
+                    <div class="input-group mb-3">
+                        <select required placeholder="Formation" id="formation" type="text"
+                               class="form-control @error('formation') is-invalid @enderror"
+                               name="formation" value="{{ old('formation') }}" required autocomplete="formation">
+                               <option value="">
+                                    Sélèctionnez votre formation
+                                </option>
+                                @foreach (\App\Models\Formation::orderBy('created_at')->get() as $formation)
+                                    <option value="{{ $formation->id }}">
+                                        {{ $formation->intitule }}
+                                    </option>
+                                @endforeach
+                        </select>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                        @error('type')
                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

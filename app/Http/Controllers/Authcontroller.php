@@ -40,13 +40,14 @@ class Authcontroller extends Controller
         }
     }
 
-    public function register_user(Request $request){
+    public function register_etudiant(Request $request){
         $this->validate($request,
             [
                 'login' => 'required|string|unique:users',
                 'nom' => 'required|string',
                 'prenom' => 'required|string',
-                'mdp' => ['required', 'string', 'min:8'],
+                'mdp' => ['required', 'string'],
+                'formation' => ['required', 'string'],
 
             ]
         );
@@ -54,11 +55,31 @@ class Authcontroller extends Controller
         $user->login = $request->input('login');
         $user->nom = $request->input('nom');
         $user->prenom = $request->input('prenom');
+        $user->type = null;
         $user->mdp = Hash::make($request->input('mdp'));
-        $user->type = $request->input('type');
         $user->save();
         $this->guard()->login($user);
-        return redirect('/home');
+        return redirect('/waiting');
+    }
+    public function register_user(Request $request){
+        $this->validate($request,
+            [
+                'login' => 'required|string|unique:users',
+                'nom' => 'required|string',
+                'prenom' => 'required|string',
+                'mdp' => ['required', 'string'],
+
+            ]
+        );
+        $user = new User;
+        $user->login = $request->input('login');
+        $user->nom = $request->input('nom');
+        $user->prenom = $request->input('prenom');
+        $user->type = null;
+        $user->mdp = Hash::make($request->input('mdp'));
+        $user->save();
+        $this->guard()->login($user);
+        return redirect('/waiting');
     }
 
     public function logout(Request $request){

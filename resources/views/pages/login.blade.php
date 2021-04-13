@@ -47,7 +47,10 @@
                     </div>
                 </form>
                 <p class="mb-0">
-                    <a href="{{'register_user'}}" class="text-center">Register</a>
+                    <a href="{{'register_etudiant'}}" class="text-center">S'enregistrer tant que étudiant</a>
+                </p>
+                <p class="mb-0">
+                    <a href="{{'register_user'}}" class="text-center">S'enregistrer tant que enseignant</a>
                 </p>
             </div>
             <!-- /.login-card-body -->

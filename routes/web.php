@@ -15,12 +15,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login_user', 'AuthController@authenticate');
 Route::post('register_user', 'AuthController@register_user');
+Route::post('register_etudiant', 'AuthController@register_etudiant');
 Route::post('logout_user', 'AuthController@logout');
 Route::get('/', function () {
     return view('pages.login');
 });
 Route::get('/register_user', function () {
     return view('pages.register');
+});
+Route::get('/register_etudiant', function () {
+    return view('pages.register_etudiant');
 });
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', function () {
