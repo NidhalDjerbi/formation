@@ -25,8 +25,8 @@
                 Liste des formations
             </a>
         @endif
-        <a class="navbar-brand" href="{{ url('/#') }}">
-            #s
+        <a class="navbar-brand" href="{{ route('user.edit',\Illuminate\Support\Facades\Auth::user()->id) }}">
+            Profile
         </a>
         @if(\Illuminate\Support\Facades\Auth::user()->type == 'user')
             <a class="navbar-brand" href="{{ url('/panier') }}">

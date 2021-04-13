@@ -27,7 +27,11 @@ class Authcontroller extends Controller
         if ($user) {
             if (password_verify($request['mdp'], $user->mdp)) {
                 $this->guard()->login($user);
-                return redirect('/home');
+                if($user->type == Null){
+                    return redirect('/waiting');
+                }else{
+                    return redirect('/home');
+                }
             } else {
                 return back()->withInput();
             }

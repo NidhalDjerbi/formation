@@ -26,6 +26,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', function () {
         return view('pages.home');
     });
+    Route::get('/waiting', function () {
+        return view('pages.waiting');
+    });
 
     // user routes
     Route::get('user', ['as' => 'user.index', 'uses' => 'UserController@index', 'middleware' => ['admin']]);

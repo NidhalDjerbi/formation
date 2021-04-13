@@ -129,7 +129,8 @@ class UserController extends Controller
             'nom' => $request['nom'],
             'prenom' => $request['prenom'],
             'login' => $request['login'],
-            'mdp' => $request['mdp']
+            'mdp' => $request['mdp'],
+            'type' => $request['type'],
         ]);
         if (Auth::user()->type == "admin")
             return redirect()->route('user.index')
