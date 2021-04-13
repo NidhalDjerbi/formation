@@ -17,9 +17,22 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('created_at', 'desc')->paginate(4);
-        return view('pages.user.index', compact('users'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        $user = Auth::user();
+        if($user->type = 'admin'){
+            $searchData = [
+                'nom' => '',
+                'prenom' => '',
+                'login' => '',
+                'type' => ''
+            ];
+            $users = User::orderBy('created_at', 'desc')->paginate(4);
+            return view('pages.user.index', compact('users', 'searchData'))
+                ->with('i', (request()->input('page', 1) - 1) * 5);
+        }else{
+            $users = User::orderBy('created_at', 'desc')->paginate(4);
+            return view('pages.user.index', compact('users'))
+                ->with('i', (request()->input('page', 1) - 1) * 5);
+        }
     }
 
     /**
@@ -67,6 +80,26 @@ class UserController extends Controller
     {
         $user = User::find($id);
         return view('pages.user.edit', compact('user'));
+    }
+
+    public function search(Request $request)
+    {
+        $searchData = [
+            'nom' => $request->input('nom'),
+            'prenom' => $request->input('prenom'),
+            'login' => $request->input('login'),
+            'type' => $request->input('type')
+        ];
+        // Search in the title and body columns from the posts table
+        $users = User::orderBy('created_at', 'desc');
+        if ($searchData['nom'] != null) $users = $users->where('nom', '=', $searchData['nom']);
+        if ($searchData['prenom'] != null) $users = $users->where('prenom', '=', $searchData['prenom']);
+        if ($searchData['login'] != null) $users = $users->where('login', '=', $searchData['login']);
+        if ($searchData['type'] != null) $users = $users->where('type', '=', $searchData['type']);
+        // Return the search view with the resluts compacted
+        $users = $users->paginate(5);
+        return view('pages.user.index', compact('users', 'searchData'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**

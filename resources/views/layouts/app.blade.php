@@ -15,14 +15,14 @@
 <div id="app">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         @if(\Illuminate\Support\Facades\Auth::user()->type == 'admin')
-            <a style="margin-left: 1%" class="navbar-brand" href="{{ url('/#') }}">
-                #
+            <a style="margin-left: 1%" class="navbar-brand" href="{{ url('/user') }}">
+                Liste des utilisateurs 
             </a>
             <a style="margin-left: 1%" class="navbar-brand" href="{{ url('/#') }}">
-                #
+                Liste des cours 
             </a>
-            <a class="navbar-brand" href="{{ url('/user') }}">
-                Users
+            <a class="navbar-brand" href="{{ url('/formation') }}">
+                Liste des formations
             </a>
         @endif
         <a class="navbar-brand" href="{{ url('/#') }}">
