@@ -24,38 +24,38 @@
                         </div>
                     </div>
                     <div class="col-xs-8 col-sm-4 col-md-2">
-                                <div class="form-group">
-                                    <strong>Type:</strong>
-                                    <select
-                                        name="type" class="form-control">
-                                        <option value="">
-                                            Choose type
-                                        </option>
-                                        @if($searchData['type'] == 'enseignant')
-                                            <option value="etudiant">
-                                                Etudiant
-                                            </option>
-                                            <option value="enseignant">
-                                                Enseignant
-                                            </option>
-                                        @elseif($searchData['type']  == 'etudiant')
-                                            <option value="etudiant">
-                                                Etudiant
-                                            </option>
-                                            <option value="enseignant">
-                                                Enseignant
-                                            </option>                                    
-                                        @else
-                                            <option value="etudiant">
-                                                Etudiant
-                                            </option>
-                                            <option value="enseignant">
-                                                Enseignant
-                                            </option>
-                                        @endif
-                                    </select>
-                                </div>
-                            </div>
+                        <div class="form-group">
+                            <strong>Type:</strong>
+                            <select
+                                name="type" class="form-control">
+                                <option value="">
+                                    Choose type
+                                </option>
+                                @if($searchData['type'] == 'enseignant')
+                                    <option value="etudiant">
+                                        Etudiant
+                                    </option>
+                                    <option value="enseignant">
+                                        Enseignant
+                                    </option>
+                                @elseif($searchData['type']  == 'etudiant')
+                                    <option value="etudiant">
+                                        Etudiant
+                                    </option>
+                                    <option value="enseignant">
+                                        Enseignant
+                                    </option>                                    
+                                @else
+                                    <option value="etudiant">
+                                        Etudiant
+                                    </option>
+                                    <option value="enseignant">
+                                        Enseignant
+                                    </option>
+                                @endif
+                            </select>
+                        </div>
+                    </div>
                     <div class="col-xs-8 col-sm-4 col-md-2">
                         <div class="form-group">
                             <button style="margin-top: 6%;" title="Recheche" type="submit"

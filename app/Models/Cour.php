@@ -15,7 +15,8 @@ class Cour extends Model
      * @var array
      */
     protected $fillable = [
-        'intitule'
+        'intitule',
+        'user_id'
     ];
 
 

@@ -52,5 +52,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('formation/edit/{id}', ['as' => 'formation.edit', 'uses' => 'FormationController@edit']);
     Route::put('formation_update/{id}', ['as' => 'formation.update', 'uses' => 'FormationController@update',]);
     Route::delete('formation_delete/{id}', ['as' => 'formation.destroy', 'uses' => 'FormationController@destroy', 'middleware' => ['admin']]);
+    
+    
+    //cour routes
+    Route::get('cour', ['as' => 'cour.index', 'uses' => 'CourController@index', 'middleware' => ['admin']]);
+    Route::get('cour/create', ['as' => 'cour.create', 'uses' => 'CourController@create', 'middleware' => ['admin']]);
+    Route::post('cour/create', ['as' => 'cour.store', 'uses' => 'CourController@store', 'middleware' => ['admin']]);
+    Route::get('cour/show/{id}', ['as' => 'cour.show', 'uses' => 'CourController@show']);
+    Route::get('cour/edit/{id}', ['as' => 'cour.edit', 'uses' => 'CourController@edit']);
+    Route::put('cour_update/{id}', ['as' => 'cour.update', 'uses' => 'CourController@update',]);
+    Route::delete('cour_delete/{id}', ['as' => 'cour.destroy', 'uses' => 'CourController@destroy', 'middleware' => ['admin']]);
+    Route::post('cour/search',  [ 'uses' => 'CourController@search', 'middleware' => ['admin']]);
 
 });

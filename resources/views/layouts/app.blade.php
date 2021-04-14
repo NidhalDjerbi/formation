@@ -18,7 +18,7 @@
             <a style="margin-left: 1%" class="navbar-brand" href="{{ url('/user') }}">
                 Liste des utilisateurs 
             </a>
-            <a style="margin-left: 1%" class="navbar-brand" href="{{ url('/#') }}">
+            <a style="margin-left: 1%" class="navbar-brand" href="{{ url('/cour') }}">
                 Liste des cours 
             </a>
             <a class="navbar-brand" href="{{ url('/formation') }}">
