@@ -49,10 +49,18 @@ class User extends Authenticatable
 
 
     /**
-     * Get the formations for the blog post.
+     * Get the formation for the blog post.
      */
-    public function formations()
+    public function formation()
     {
-        return $this->hasMany(Formation::class);
+        return $this->belongsTo(Formation::class);
+    }
+
+    /**
+     * The cours that belong to the user.
+     */
+    public function cours()
+    {
+        return $this->belongsToMany(Cour::class,'cours_users', 'user_id', 'cours_id');
     }
 }

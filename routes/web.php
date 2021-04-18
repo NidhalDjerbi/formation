@@ -60,8 +60,19 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('cour/create', ['as' => 'cour.store', 'uses' => 'CourController@store', 'middleware' => ['admin']]);
     Route::get('cour/show/{id}', ['as' => 'cour.show', 'uses' => 'CourController@show']);
     Route::get('cour/edit/{id}', ['as' => 'cour.edit', 'uses' => 'CourController@edit']);
+    Route::post('cour/inscription/{id}', ['as' => 'cour.inscription', 'uses' => 'CourController@inscription', 'middleware' => ['etudiant']]);
+    Route::post('cour/desinscription/{id}', ['as' => 'cour.desinscription', 'uses' => 'CourController@desinscription', 'middleware' => ['etudiant']]);
     Route::put('cour_update/{id}', ['as' => 'cour.update', 'uses' => 'CourController@update',]);
     Route::delete('cour_delete/{id}', ['as' => 'cour.destroy', 'uses' => 'CourController@destroy', 'middleware' => ['admin']]);
     Route::post('cour/search',  [ 'uses' => 'CourController@search', 'middleware' => ['admin']]);
-
+    
+    Route::get('cour/formation', ['as' => 'cour.cour_formation', 'uses' => 'CourController@cour_formation', 'middleware' => ['etudiant']]);
+    Route::get('cour/etudiant', ['as' => 'cour.cour_etudiant', 'uses' => 'CourController@cour_etudiant', 'middleware' => ['etudiant']]);
+    Route::get('cour/planning', ['as' => 'cour.planning', 'uses' => 'CourController@planning', 'middleware' => ['etudiant']]);
+    Route::post('cour/searchCourEtudiant',  [ 'uses' => 'CourController@searchCourEtudiant', 'middleware' => ['etudiant']]);
+    Route::post('cour/searchCourFormation',  [ 'uses' => 'CourController@searchCourFormation', 'middleware' => ['etudiant']]);
+    Route::post('cour/planning/search',  [ 'uses' => 'CourController@planningSearch', 'middleware' => ['etudiant']]);
+    
+    
+    Route::get('cour/enseignant', ['as' => 'cour.cour_enseignant', 'uses' => 'CourController@cour_enseignant', 'middleware' => ['enseignant']]);
 });

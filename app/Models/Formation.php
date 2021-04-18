@@ -22,8 +22,16 @@ class Formation extends Model
     /**
      * Get the user that owns the formation.
      */
-    public function user()
+    public function users()
     {
-        return $this->belongsTo(Formation::class);
+        return $this->hasMany(Formation::class);
+    }
+
+    /**
+     * Get the cours for the blog post.
+     */
+    public function cours()
+    {
+        return $this->hasMany(Cour::class);
     }
 }

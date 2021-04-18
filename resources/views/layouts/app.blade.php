@@ -28,12 +28,29 @@
         <a class="navbar-brand" href="{{ route('user.edit',\Illuminate\Support\Facades\Auth::user()->id) }}">
             Profile
         </a>
-        @if(\Illuminate\Support\Facades\Auth::user()->type == 'user')
-            <a class="navbar-brand" href="{{ url('/panier') }}">
-                Panier
+        @if(\Illuminate\Support\Facades\Auth::user()->type == 'etudiant')
+            <a class="navbar-brand" href="{{ url('/cour/formation') }}">
+                Liste des cours
             </a>
-            <a class="navbar-brand" href="{{ route('user.edit',\Illuminate\Support\Facades\Auth::user()->id) }}">
-                Profile
+            <a class="navbar-brand" href="{{ url('/cour/etudiant') }}">
+                Mes cours
+            </a>
+            <a class="navbar-brand" href="{{ url('/cour/planning') }}">
+                Mes plannings
+            </a>
+        @endif
+        @if(\Illuminate\Support\Facades\Auth::user()->type == 'enseignant')
+            <a class="navbar-brand" href="{{ url('/cour/enseignant') }}">
+                Liste des cours
+            </a>
+    
+            <a class="navbar-brand" href="{{ url('/cour/planning') }}">
+                Mes plannings
+            </a>
+
+
+            <a class="navbar-brand" href="{{ url('/cour/planning') }}">
+                Gestion des plannings
             </a>
         @endif
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
