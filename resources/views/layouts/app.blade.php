@@ -44,7 +44,7 @@
                 Liste des cours
             </a>
     
-            <a class="navbar-brand" href="{{ url('/cour/planning') }}">
+            <a class="navbar-brand" href="{{ url('cour/planning/enseignant') }}">
                 Mes plannings
             </a>
 

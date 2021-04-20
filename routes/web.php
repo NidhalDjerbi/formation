@@ -68,11 +68,12 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::get('cour/formation', ['as' => 'cour.cour_formation', 'uses' => 'CourController@cour_formation', 'middleware' => ['etudiant']]);
     Route::get('cour/etudiant', ['as' => 'cour.cour_etudiant', 'uses' => 'CourController@cour_etudiant', 'middleware' => ['etudiant']]);
-    Route::get('cour/planning', ['as' => 'cour.planning', 'uses' => 'CourController@planning', 'middleware' => ['etudiant']]);
+    Route::get('cour/planning', ['as' => 'cour.planning', 'uses' => 'CourController@planning']);
     Route::post('cour/searchCourEtudiant',  [ 'uses' => 'CourController@searchCourEtudiant', 'middleware' => ['etudiant']]);
     Route::post('cour/searchCourFormation',  [ 'uses' => 'CourController@searchCourFormation', 'middleware' => ['etudiant']]);
     Route::post('cour/planning/search',  [ 'uses' => 'CourController@planningSearch', 'middleware' => ['etudiant']]);
     
     
     Route::get('cour/enseignant', ['as' => 'cour.cour_enseignant', 'uses' => 'CourController@cour_enseignant', 'middleware' => ['enseignant']]);
+    Route::get('cour/planning/enseignant', ['as' => 'cour.planning_enseignant', 'uses' => 'CourController@planningEnseignant', 'middleware' => ['enseignant']]);
 });

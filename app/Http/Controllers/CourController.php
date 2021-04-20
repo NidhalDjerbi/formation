@@ -61,7 +61,7 @@ class CourController extends Controller
      */
     public function cour_enseignant(){
         $user = Auth::user();
-        $cours = Cour::where('user_id', '=', $user->id)->paginate(4);;
+        $cours = Cour::where('user_id', '=', $user->id)->paginate(4);
         return view('pages.cour.coursEnseignant', compact('cours'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
         
@@ -84,40 +84,6 @@ class CourController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * 5);
         
     }
-
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function planning(){
-        $searchData = [
-            'intitule' => '',
-            'date_debut' => \Carbon\Carbon::now()->format('20y-m-d'),
-            'date_fin' => \Carbon\Carbon::now()->format('20y-m-d'),
-        ];
-
-        $dateFormat = 'Y-m-d';
-
-        $dateEnd = $dateTime = \DateTime::createFromFormat($dateFormat, $searchData['date_debut']);
-        $dateBegin = $dateTime = \DateTime::createFromFormat($dateFormat, $searchData['date_fin']);
-        $user = Auth::user();
-        // $plannings =[];
-        // $su = CourUser::where('user_id', '=', $user->id)->get();
-        // foreach ($su as $u) {
-        //     array_push($plannings, Planning::where('cours_id', '=', $u->cours_id)->get());
-        // }
-        $plannings = DB::table('plannings')
-            ->join('cours_users', 'plannings.cours_id', '=', 'cours_users.cours_id')
-            ->join('users', 'users.id', '=', 'cours_users.user_id')
-            ->select('plannings.*')
-            ->paginate(4);
-        return view('pages.cour.planning', compact('plannings','searchData'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
-        
-    }
-
 
 
     /**
@@ -264,8 +230,12 @@ class CourController extends Controller
                 ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
-    public function planningSearch(Request $request){
-        $user = Auth::user();
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function planning(){
         $searchData = [
             'intitule' => '',
             'date_debut' => \Carbon\Carbon::now()->format('20y-m-d'),
@@ -277,15 +247,64 @@ class CourController extends Controller
         $dateEnd = $dateTime = \DateTime::createFromFormat($dateFormat, $searchData['date_debut']);
         $dateBegin = $dateTime = \DateTime::createFromFormat($dateFormat, $searchData['date_fin']);
         
-        // Search in the title and body columns from the posts table
-        $plannings = DB::table('plannings')
-        ->join('cours_users', 'plannings.cours_id', '=', 'cours_users.cours_id')
-        ->join('users', 'users.id', '=', 'cours_users.user_id')
-        ->select('plannings.*')
-        ->paginate(4);
+        $plannings = Auth::user()->cours()->with('plannings')->paginate(4);
+        return view('pages.cour.planning', compact('plannings','searchData'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
+        
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function planningEnseignant(){
+        $plannings = [];
+        $searchData = [
+            'intitule' => '',
+            'date_debut' => \Carbon\Carbon::now()->format('20y-m-d'),
+            'date_fin' => \Carbon\Carbon::now()->format('20y-m-d'),
+        ];
+        $user = Auth::user();
+        $dateFormat = 'Y-m-d';
+
+        $dateEnd = $dateTime = \DateTime::createFromFormat($dateFormat, $searchData['date_debut']);
+        $dateBegin = $dateTime = \DateTime::createFromFormat($dateFormat, $searchData['date_fin']);
+        $plannings = DB::table('cours')
+            ->join('plannings', 'cours.id', '=', 'plannings.cours_id')
+            ->select('cours.*', 'plannings.date_debut', 'plannings.date_fin')
+            ->get();
+        return view('pages.cour.planningEnseignant', compact('plannings','searchData'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
+        
+    }
+
+    public function planningSearch(Request $request){
+        $user = Auth::user();
+        $searchData = [
+            'intitule' => $request->input('intitule'),
+            'date_debut' => $request->input('date_debut'),
+            'date_fin' => $request->input('date_fin'),
+        ];
+
+        $dateFormat = 'Y-m-d';
+
+        $date_debut = $dateTime = \DateTime::createFromFormat($dateFormat, $searchData['date_debut']);
+        $date_fin = $dateTime = \DateTime::createFromFormat($dateFormat, $searchData['date_fin']);
+        $plannings = Auth::user()->cours()->with('plannings')->first();
+        // dd($plannings->plannings[0]->whereDate('date_fin', '<', $searchData['date_fin'])->whereDate('date_debut', '>', $searchData['date_debut']));
+        // dd($plannings->plannings[0]->whereBetween('date_debut', [$date_debut,$date_fin]));
+        // dd(($plannings->plannings[0]->date_fin) >=  $date_debut  && ($plannings->plannings[0]->date_debut) <=  $date_fin  );
+        // dd($date_debut, $date_fin,  (($plannings->plannings[0]->date_debut <= $date_debut ) && ($plannings->plannings[0]->date_fin <= $date_fin)));
+        // dd($plannings);
+        // $servicesImpacted->contains('intitule', $plannings->intitule)
+        // if ($searchData['intitule'] != null) $plannings = $searchData['intitule']->contains($plannings);
+        // dd( $plannings->plannings[0]);
         if ($searchData['intitule'] != null) $plannings = $plannings->where('intitule', '=', $searchData['intitule']);
-        if ($searchData['date_debut'] != null && $searchData['date_fin'] != null) $plannings = $plannings->where('user_id', '=', $searchData['user_id']);
+        if ($searchData['date_debut'] != null && $searchData['date_fin'] != null) $plannings = $plannings->plannings[0]->whereDate('date_fin', '<', $searchData['date_fin'])->whereDate('date_debut', '>', $searchData['date_debut']);
+        // dd($plannings);
         // Return the search view with the resluts compacted
+        // dd($searchData['intitule']);
         return view('pages.cour.planning', compact('plannings','searchData'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
