@@ -76,4 +76,6 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::get('cour/enseignant', ['as' => 'cour.cour_enseignant', 'uses' => 'CourController@cour_enseignant', 'middleware' => ['enseignant']]);
     Route::get('cour/planning/enseignant', ['as' => 'cour.planning_enseignant', 'uses' => 'CourController@planningEnseignant', 'middleware' => ['enseignant']]);
+    Route::post('cour/planning/enseignant/search',  [ 'uses' => 'CourController@planningEnseignantSearch', 'middleware' => ['enseignant']]);
+
 });

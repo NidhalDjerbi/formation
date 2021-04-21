@@ -15,7 +15,7 @@
                     <p>{{ $message }}</p>
                 </div>
             @endif
-            <form action="{{url('cour/planning/search')}}" method="post" role="search">
+            <form action="{{url('cour/planning/enseignant/search')}}" method="post" role="search">
                 @csrf
                 <div class="row">
                     <div class="col-xs-8 col-sm-4 col-md-2">

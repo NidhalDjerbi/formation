@@ -54,7 +54,6 @@
                 <tr>
                     <th>No</th>
                     <th>Cour</th>
-                    <th>Enseignant</th>
                     <th>Date début</th>
                     <th>Date fin</th>
                 </tr>
@@ -62,9 +61,8 @@
                     <tr>
                         <td>{{ ++$i }}</td>
                         <td>{{$planning->intitule}}</td>
-                        <td>{{$planning->user['nom']}}</td>
-                        <td>{{ $planning->plannings[0]->date_debut }}</td>
-                        <td>{{ $planning->plannings[0]->date_fin }}</td>
+                        <td>{{ $planning->date_debut }}</td>
+                        <td>{{ $planning->date_fin }}</td>
                     </tr>
                 @endforeach
             </table>
