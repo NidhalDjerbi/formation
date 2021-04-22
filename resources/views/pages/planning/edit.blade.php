@@ -1,15 +1,15 @@
-@extends('layouts.app')
 
+@extends('layouts.app')
 @section('content')
     <div class="card" style="margin: 2%;">
         <div class="card-body">
             <div class="row">
                 <div class="col-lg-12 margin-tb">
                     <div class="pull-left">
-                        <h2>Ajouter une formation</h2>
+                        <h2>Modifier une formation</h2>
                     </div>
                     <div style="text-align: end" class="pull-right">
-                        <a class="btn btn-primary" href="{{ route('formation.index') }}"> Retour</a>
+                        <a class="btn btn-primary" href="{{ route('formation.index') }}"> Back</a>
                     </div>
                 </div>
             </div>
@@ -24,15 +24,21 @@
                     </ul>
                 </div>
             @endif
-
-            <form action="{{ route('formation.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('planning.update',$planning->planning_id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
 
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="col-xs-12 col-sm-12 col-md-4">
                         <div class="form-group">
-                            <strong>Intitule:</strong>
-                            <input required type="text" name="intitule" class="form-control" placeholder="Entrer l'intitule">
+                            <strong>Date début:</strong>
+                            <input class="form-control" type="date" name="date_debut" value="{{ $planning->date_debut }}" >
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4">
+                        <div class="form-group">
+                            <strong>Date fin:</strong>
+                            <input class="form-control" type="date" name="date_fin" value="{{ $planning->date_fin}}">
                         </div>
                     </div>
                 </div>

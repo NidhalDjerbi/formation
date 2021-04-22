@@ -56,6 +56,7 @@
                     <th>Cour</th>
                     <th>Date début</th>
                     <th>Date fin</th>
+                    <th width="280px">Action</th>
                 </tr>
                 @foreach ($plannings as $planning)
                     <tr>
@@ -63,6 +64,10 @@
                         <td>{{$planning->intitule}}</td>
                         <td>{{ $planning->date_debut }}</td>
                         <td>{{ $planning->date_fin }}</td>
+                        <td>
+                            <a class="btn btn-success" href="{{ route('planning.edit',$planning->planning_id) }}">Maj une séance</a>
+                            <a class="btn btn-danger" href="{{ route('planning.destroy',$planning->planning_id) }}">Supprimer une séance</a>
+                        </td>
                     </tr>
                 @endforeach
             </table>

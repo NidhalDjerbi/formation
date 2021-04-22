@@ -20,11 +20,15 @@
                 <tr>
                     <th>No</th>
                     <th>Intitule</th>
+                    <th width="280px">Action</th>
                 </tr>
                 @foreach ($cours as $cour)
                     <tr>
                         <td>{{ ++$i }}</td>
                         <td>{{ $cour->intitule }}</td>
+                        <td>
+                            <a class="btn btn-info" href="{{ route('planning.create',$cour->id) }}">Ajouter une séance</a>
+                        </td>
                     </tr>
 
                 @endforeach

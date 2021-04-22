@@ -78,4 +78,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('cour/planning/enseignant', ['as' => 'cour.planning_enseignant', 'uses' => 'CourController@planningEnseignant', 'middleware' => ['enseignant']]);
     Route::post('cour/planning/enseignant/search',  [ 'uses' => 'CourController@planningEnseignantSearch', 'middleware' => ['enseignant']]);
 
+
+
+    Route::get('planning/create/{id}', ['as' => 'planning.create', 'uses' => 'PlanningController@create', 'middleware' => ['enseignant']]);
+    Route::post('planning/create/{id}', ['as' => 'planning.store', 'uses' => 'PlanningController@store', 'middleware' => ['enseignant']]);
+    Route::get('planning/show/{id}', ['as' => 'planning.show', 'uses' => 'PlanningController@show']);
+    Route::get('planning/edit/{id}', ['as' => 'planning.edit', 'uses' => 'PlanningController@edit', 'middleware' => ['enseignant']]);
+    Route::post('planning_update/{id}', ['as' => 'planning.update', 'uses' => 'PlanningController@update', 'middleware' => ['enseignant']]);
+    Route::get('planning_delete/{id}', ['as' => 'planning.destroy', 'uses' => 'PlanningController@destroy', 'middleware' => ['enseignant']]);
+    
+
 });
