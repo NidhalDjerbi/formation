@@ -1,6 +1,7 @@
 
 @extends('layouts.app')
 @section('content')
+
     <div class="card" style="margin: 2%;">
         <div class="card-body">
             <div class="row">
@@ -24,7 +25,7 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('planning.update',$planning->planning_id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('planning.update',$planning->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 

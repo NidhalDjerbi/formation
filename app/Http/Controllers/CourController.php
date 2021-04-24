@@ -298,7 +298,7 @@ class CourController extends Controller
         $date_fin = $dateTime = \DateTime::createFromFormat($dateFormat, $searchData['date_fin']);
         $plannings = DB::table('cours')
             ->join('plannings', 'cours.id', '=', 'plannings.cours_id')
-            ->select('cours.*', 'plannings.date_debut', 'plannings.date_fin')
+            ->select('cours.*', 'plannings.date_debut', 'plannings.date_fin', 'plannings.id as planning_id')
             ->where('cours.user_id', '=', $user->id);
             
         // dd($plannings);
