@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-lg-12 margin-tb">
                     <div class="pull-left">
-                        <h2>Modifier une formation</h2>
+                        <h2>Modifier le planning</h2>
                     </div>
                     <div style="text-align: end" class="pull-right">
                         <a class="btn btn-primary" href="{{ route('formation.index') }}"> Back</a>
@@ -25,30 +25,58 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('planning.update',$planning->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
+            @if(\Illuminate\Support\Facades\Auth::user()->type == 'admin')
+                <form action="{{ route('admin.planning.update',$planning->id) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
 
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-4">
-                        <div class="form-group">
-                            <strong>Date début:</strong>
-                            <input class="form-control" type="date" name="date_debut" value="{{ $planning->date_debut }}" >
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <strong>Date début:</strong>
+                                <input class="form-control" type="date" name="date_debut" value="{{ $planning->date_debut }}" >
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <strong>Date fin:</strong>
+                                <input class="form-control" type="date" name="date_fin" value="{{ $planning->date_fin}}">
+                            </div>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-4">
-                        <div class="form-group">
-                            <strong>Date fin:</strong>
-                            <input class="form-control" type="date" name="date_fin" value="{{ $planning->date_fin}}">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            @endif
+            @if(\Illuminate\Support\Facades\Auth::user()->type == 'enseignant')
+                <form action="{{ route('planning.update',$planning->id) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <strong>Date début:</strong>
+                                <input class="form-control" type="date" name="date_debut" value="{{ $planning->date_debut }}" >
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <strong>Date fin:</strong>
+                                <input class="form-control" type="date" name="date_fin" value="{{ $planning->date_fin}}">
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </form>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            @endif
         </div>
     </div>
 @endsection

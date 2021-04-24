@@ -79,7 +79,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('cour/planning/enseignant/search',  [ 'uses' => 'CourController@planningEnseignantSearch', 'middleware' => ['enseignant']]);
 
 
+    Route::get('planning', ['as' => 'planning.index', 'uses' => 'PlanningController@index', 'middleware' => ['admin']]);
+    Route::post('planning/search',  [ 'uses' => 'PlanningController@search', 'middleware' => ['admin']]);
 
+    Route::get('admin/planning/create', ['as' => 'admin.planning.create', 'uses' => 'PlanningController@createFromAdmin', 'middleware' => ['admin']]);
+    Route::post('admin/planning/create', ['as' => 'admin.planning.store', 'uses' => 'PlanningController@storeFromAdmin', 'middleware' => ['admin']]);
+    Route::get('admin/planning/edit/{id}', ['as' => 'admin.planning.edit', 'uses' => 'PlanningController@edit', 'middleware' => ['admin']]);
+    Route::put('admin/planning_update/{id}', ['as' => 'admin.planning.update', 'uses' => 'PlanningController@update', 'middleware' => ['admin']]);
+    Route::get('admin/planning_delete/{id}', ['as' => 'admin.planning.destroy', 'uses' => 'PlanningController@destroy', 'middleware' => ['admin']]);
+    
     Route::get('planning/create/{id}', ['as' => 'planning.create', 'uses' => 'PlanningController@create', 'middleware' => ['enseignant']]);
     Route::post('planning/create/{id}', ['as' => 'planning.store', 'uses' => 'PlanningController@store', 'middleware' => ['enseignant']]);
     Route::get('planning/show/{id}', ['as' => 'planning.show', 'uses' => 'PlanningController@show']);
