@@ -78,7 +78,6 @@
                     </tr>
                 @endforeach
             </table>
-                {!! $plannings->links() !!}
             </div>
         </div>
     </div>

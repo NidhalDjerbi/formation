@@ -106,14 +106,19 @@
                             <td>
                                 <form action="{{ route('user.destroy',$user->id) }}" method="POST">
 
-                                    <a class="btn btn-info" href="{{ route('user.show',$user->id) }}">Show</a>
                                     @if($user->type != 'admin')
+                                        @if ($user->type == null)
+                                            <a class="btn btn-primary" href="{{ route('user.edit',$user->id) }}">Accepter</a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-warning">Refus</button>
+                                        @else
                                         <a class="btn btn-primary" href="{{ route('user.edit',$user->id) }}">Edit</a>
+                                            @csrf
+                                            @method('DELETE')
 
-                                        @csrf
-                                        @method('DELETE')
-
-                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        @endif
                                     @endif
                                 </form>
                             </td>

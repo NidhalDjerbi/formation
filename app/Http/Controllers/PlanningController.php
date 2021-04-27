@@ -53,12 +53,16 @@ class PlanningController extends Controller
         $date_fin = $dateTime = \DateTime::createFromFormat($dateFormat, $searchData['date_fin']);
       
         // Search in the title and body columns from the posts table
-            $plannings = Planning::orderBy('created_at', 'desc');
-            if ($searchData['intitule'] != null) $plannings = $plannings->where('intitule', '=', $searchData['intitule']);
-            if($date_debut != null) $plannings = $plannings->whereDate('date_debut','>=',$date_debut);
-            if($date_fin !=null) $plannings = $plannings->whereDate('date_fin','<=',$date_fin);
+            $plannings = DB::table('plannings')
+            ->join('cours','plannings.cours_id', '=', 'cours.id')
+            ->select('plannings.*', 'cours.intitule');
+            if ($searchData['intitule'] != null) {
+                $plannings = $plannings->where('intitule', '=', $searchData['intitule'])->get();
+            }else{
+                if($date_debut != null) $plannings = $plannings->whereDate('date_debut','>=',$date_debut);
+                if($date_fin !=null) $plannings = $plannings->whereDate('date_fin','<=',$date_fin)->get();
+            }
             // Return the search view with the resluts compacted
-            $plannings = $plannings->paginate(5);
             return view('pages.planning.index', compact('plannings', 'searchData'))
                 ->with('i', (request()->input('page', 1) - 1) * 5);
     }

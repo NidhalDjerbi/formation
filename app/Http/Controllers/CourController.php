@@ -47,7 +47,7 @@ class CourController extends Controller
             'user_id' => ''           
         ];
         $user = Auth::user();
-        $cours = Cour::cours_formation();
+        $cours = Cour::where('formation_id', "=", $user->formation_id)->paginate(4);
         return view('pages.cour.coursFormation', compact('cours', 'searchData'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }

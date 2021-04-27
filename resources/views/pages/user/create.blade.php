@@ -36,6 +36,12 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-6">
                         <div class="form-group">
+                            <strong>Prenom:</strong>
+                            <input required type="text" name="prenom" class="form-control" placeholder="Votre Prenom">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6">
+                        <div class="form-group">
                             <strong>Login:</strong>
                             <input required type="text"
                                    name="login" class="form-control" placeholder="Votre Login">

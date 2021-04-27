@@ -55,6 +55,7 @@ class Authcontroller extends Controller
         $user->login = $request->input('login');
         $user->nom = $request->input('nom');
         $user->prenom = $request->input('prenom');
+        $user->formation_id = $request->input('formation');
         $user->type = null;
         $user->mdp = Hash::make($request->input('mdp'));
         $user->save();

@@ -60,10 +60,10 @@ class UserController extends Controller
             'mdp' => ['required', 'string', 'min:8'],
             'type' => 'required'
         ]);
-
-        $user->login = $request->input('login');
+        $user = new User();
         $user->nom = $request->input('nom');
         $user->prenom = $request->input('prenom');
+        $user->login = $request->input('login');
         $user->mdp = Hash::make($request->input('mdp'));
         $user->type = $request->input('type');
         $user->save();
@@ -138,6 +138,20 @@ class UserController extends Controller
         else
             return back()
                 ->with('success', 'User updated successfully');
+    }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param \App\User $planning
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $user = User::find($id);
+
+        $user->delete();
+            return redirect()->route('user.index')
+            ->with('success', 'User deleted successfully'); 
     }
 
 }
