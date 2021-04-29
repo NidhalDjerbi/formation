@@ -34,13 +34,13 @@
                         <div class="col-xs-12 col-sm-12 col-md-4">
                             <div class="form-group">
                                 <strong>Date début:</strong>
-                                <input class="form-control" type="date" name="date_debut" value="{{ $planning->date_debut }}" >
+                                <input class="form-control" type="datetime-local" name="date_debut" value="{{ $planning->date_debut }}" >
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-4">
                             <div class="form-group">
                                 <strong>Date fin:</strong>
-                                <input class="form-control" type="date" name="date_fin" value="{{ $planning->date_fin}}">
+                                <input class="form-control" type="datetime-local" name="date_fin" value="{{ $planning->date_fin}}">
                             </div>
                         </div>
                     </div>
@@ -60,13 +60,13 @@
                         <div class="col-xs-12 col-sm-12 col-md-4">
                             <div class="form-group">
                                 <strong>Date début:</strong>
-                                <input class="form-control" type="date" name="date_debut" value="{{ $planning->date_debut }}" >
+                                <input class="form-control" type="datetime-local" name="date_debut" value="{{ $planning->date_debut }}" >
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-4">
                             <div class="form-group">
                                 <strong>Date fin:</strong>
-                                <input class="form-control" type="date" name="date_fin" value="{{ $planning->date_fin}}">
+                                <input class="form-control" type="datetime-local" name="date_fin" value="{{ $planning->date_fin}}">
                             </div>
                         </div>
                     </div>
